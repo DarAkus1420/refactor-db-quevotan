@@ -18,9 +18,9 @@ votaciones = votaciones_collection.find_one({})
 counter = 0
 
 
-def diputado_fix(diputado, votacion):
-    obj = {**diputado, "participacion": votacion[str(diputado["ID"])]}
-    return obj
+# def diputado_fix(diputado, votacion):
+#     obj = {**diputado, "participacion": votacion[str(diputado["ID"])]}
+#     return obj
 
 
 nominate2 = []
@@ -33,9 +33,9 @@ for a in wnominates:
     #     *diputados, *[diputado_fix(diputado, a["votacion"][0]) for diputado in a["wnominate"]]]
     print(a.get("id"))
     votacion = votaciones_collection.find_one({"id": a.get("id")})
-    print(votacion)
-    nominate2 = [
-        *nominate2, {"id": a.get("id"), "periodoLegis": a.get("periodoLegis"), "diputados": diputados, "votacion": {"Nombre": votacion.get("nombre"), "boletin": votacion.get('boletin'), "fechaInicio": votacion.get('fechaIngresoBoletin'), 'fechaFin': votacion.get('fecha')}}]
+    if(votacion):
+        nominate2 = [
+            *nominate2, {"id": a.get("id"), "periodoLegis": a.get("periodolegis"), "diputados": diputados, "votacion": {"Nombre": votacion.get("nombre"), "boletin": votacion.get('boletin'), "fechaInicio": votacion.get('fechaIngresoBoletin'), 'fechaFin': votacion.get('fecha')}}]
 
 new_wnominate_collection = db['new_wnominate']
 new_wnominate_collection.insert_many(nominate2)
