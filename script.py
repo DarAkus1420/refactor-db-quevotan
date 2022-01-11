@@ -7,7 +7,7 @@ pp = pprint.PrettyPrinter(indent=4)
 db = client.quevotan
 boletin_collection = db["BoletinFromDiputados"]
 boletines = boletin_collection.find(
-    {"VotacionesAsoc": {"$exists": True, "$not": {"$size": 0}}, 'legislatura': {"$gte": 365}, "camaraOrigen": "Cámara de Diputados"})
+    {"VotacionesAsoc": {"$exists": True, "$not": {"$size": 0}}, 'legislatura': {"$gte": 366}, "camaraOrigen": "Cámara de Diputados"})
 
 counter = 0
 boletines_sorted = sorted(boletines, key=lambda x: x['legislatura'])
